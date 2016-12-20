@@ -1,0 +1,29 @@
+//get quote div
+response.xpath('//*[@class="quote"]').extract()
+
+//get first quote text
+response.xpath('//*[@class="quote"]/span[@class="text"]//text()').extract()
+
+//get author
+response.xpath('//*[@class="author"]//text()').extract()
+
+//get tags
+response.xpath('//*[@class="tags"]/a[@class="tag"]//text()').extract()
+
+//get href to nextPages
+response.xpath('//*[@class="pager"]/li[@class="next"]/a/@href')
+
+
+//get about href to Authors
+response.xpath('//*[@class="quote"]/span/a/@href')
+
+
+                  //////about page prequisites//////
+//get author name
+response.xpath('//*[@class="author-details"]/h3[@class="author-title"]//text()')
+
+//get author birthdate
+response.xpath('//*[@class="author-details"]/p/span[@class="author-born-date"]//text()')
+
+//get author biography
+response.xpath('//*[@class="author-details"]/div[@class="author-description"]//text()')
