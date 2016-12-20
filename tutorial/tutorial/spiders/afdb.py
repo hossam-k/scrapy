@@ -14,16 +14,18 @@ class AFDBSpider(scrapy.Spider):
     }
 
     def start_requests(self):
-        urls = (
+        urls = [
             "http://www.afdb.org/en/projects-and-operations/procurement/resources-for-businesses/general-procurement-notices-gpns/",
             "http://www.afdb.org/en/projects-and-operations/procurement/resources-for-businesses/invitation-for-bids/",
             "http://www.afdb.org/en/projects-and-operations/procurement/resources-for-businesses/specific-procurement-notices-spns/",
-        )
+            "http://www.afdb.org/en/projects-and-operations/procurement/resources-for-businesses/expressions-of-interest-for-consultants/",
+            "http://www.afdb.org/en/projects-and-operations/procurement/resources-for-businesses/procurement-plans/",
+        ]
         for url in urls:
             #filtering search results for information and technology topics
-            return [ FormRequest(url=url,
+            yield  FormRequest(url=url,
                      formdata={'tx_llcatalog_pi[filters][countries][]': 'all', 'tx_llcatalog_pi[filters][themes][]': '648', 'tx_llcatalog_pi[filters][search]':'search'},
-                     callback=self.parse) ]
+                     callback=self.parse)
 
     def parse(self, response):
         item_list_selector = response.xpath(self.item_list_fields["items_table"])
